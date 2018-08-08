@@ -14,19 +14,19 @@ class Index extends Base
 	 * @param  [type] $id [参数 id]
 	 * @return [type]     [description]
 	 */
-	public function queryAll($id)
-    {	
-    	try{
-    		$statement = "select * from cool_users where user_id =".(int)$_GET['id'];
-			$newPdo = DbModel::Pdo();
-			$query = $newPdo->query($statement);
-			$fetchAll = $query->FetchAll();
-			// var_dump($fetchAll);
-			if(!empty($fetchAll)) CommonClass::writeSysLog('第二次测试写入系统日志,查询成功');
-    	} catch(Exception $e){
-    		echo $e->getMessage();
-    	}
-		
+    public function queryAll($id)
+    {   
+        try{
+            $statement = "select * from cool_users where user_id =".(int)$_GET['id'];
+            $newPdo = DbModel::Pdo();
+            $query = $newPdo->query($statement);
+            $fetchAll = $query->FetchAll();
+            // var_dump($fetchAll);
+            if(!empty($fetchAll)) CommonClass::writeSysLog('第二次测试写入系统日志,查询成功');
+        } catch(Exception $e){
+            echo $e->getMessage();
+        }
+        
     }
     /**
      * Smarty 模板解析
@@ -41,6 +41,8 @@ class Index extends Base
     	$strMethod = substr($_method,strpos($_method,':')+2);
         $route = dirname(dirname(__FILE__)).'/view/'.$strController.'/'.$strMethod.'.html';
     	$_smarty =  $this->_smarty;
+        // 设置缓存目录
+        $_smarty ->setTemplateDir(RUNTIME_PATH.'templates/')->addTemplateDir(RUNTIME_PATH.'templates2/')->setCompileDir(RUNTIME_PATH.'templates_c/')->addPluginsDir(RUNTIME_PATH.'plugins/')->setCacheDir(RUNTIME_PATH.'cache/')->setConfigDir(RUNTIME_PATH.'configs');
     	//end
     	//分配变量与模板解析
 		$content = '假装模板已经解析';
@@ -59,7 +61,7 @@ class Index extends Base
     	$strMethod = substr($_method,strpos($_method,':')+2);
     	$route = dirname(dirname(__FILE__)).'/view/'.$strController.'/'.$strMethod.'.html';
     	$_smarty =  $this->_smarty;
-
+        $_smarty ->setTemplateDir(RUNTIME_PATH.'templates/')->addTemplateDir(RUNTIME_PATH.'templates2/')->setCompileDir(RUNTIME_PATH.'templates_c/')->addPluginsDir(RUNTIME_PATH.'plugins/')->setCacheDir(RUNTIME_PATH.'cache/')->setConfigDir(RUNTIME_PATH.'configs');
 		$_smarty->assign('find', $find);
 		$_smarty->display($route);
     }
