@@ -1,0 +1,11 @@
+{
+    "name": "administrator/cool-php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ywdeng",
+            "email": "code301@163.com"
+        }
+    ],
+    "require": {}
+}
